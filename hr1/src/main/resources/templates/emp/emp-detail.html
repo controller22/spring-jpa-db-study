@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>직원 상세</h1>
+    <div>
+        
+         <span> 직원번호 : </span>
+        <span th:text="${EmpDetailDTOList.employeeId}"></span></br>
+        <span> 직원이름 :</span>
+        <span th:text="${EmpDetailDTOList.firstName}"></span></br>
+        <span> 직원성  : </span>
+        <span th:text="${EmpDetailDTOList.lastName}"></span></br>
+        <span> 직원월급 : </span>
+        <span th:text="${EmpDetailDTOList.salary}"></span></br>
+    </div>
+    
+</body>
+</html>
