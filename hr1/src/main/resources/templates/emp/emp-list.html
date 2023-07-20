@@ -14,6 +14,10 @@
 </head>
 <body>
     <h1>직원 리스트</h1>
+    <div>
+        <input id="searchValue" type="text" placeholder="firstName을 입력하세요">
+        <button id="searchButton">검색</button>
+    </div>
     <div class="card" th:each="dto:${empTableDTO}" th:onclick="goDetail([[${dto.employeeId}]])">
         <div  >
         <span>직원번호 : </span>
@@ -24,9 +28,19 @@
     </div>
    
     <script>
+
+        // 페이지 이동
         const goDetail=(employeeId) => {
             location.href="/emp/"+employeeId;
         }
+
+        document.querySelector("#searchButton").addEventListener("click",()=>{
+
+            // alert(document.querySelector("#searchValue").value);
+
+            location.href = "/emp?firstName=" + document.querySelector("#searchValue").value;
+        });
+
     </script>
 </body>
 </html>

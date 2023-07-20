@@ -13,8 +13,8 @@
   </head>
   <body>
     <div>
-      <input type="text" placeholder="새 지역" />
-      <button>추가</button>
+      <input id="newRegion" type="text" placeholder="새 지역" />
+      <button id="addButton">추가</button>
     </div>
     <div>
       <ul>
@@ -26,5 +26,34 @@
         </li>
       </ul>
     </div>
+
+    <script>
+      document.querySelector("#addButton").addEventListener("click", () => {
+        const reqInsertMainDTO = {
+          regionsName: document.querySelector("#newRegion").value,
+        };
+
+        fetch("/api/v1/main", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reqInsertMainDTO),
+        })
+          .then((response) => response.json()) // 받은 응답을 JSON으로 파싱합니다.
+          .then((data) => {
+            // 서버에서 보낸 JSON 데이터를 사용합니다.
+            console.log(data);
+            alert(data.message);
+            if (data.code === 0) {
+              location.reload();
+            }
+          })
+          .catch((error) => {
+            // 오류 처리
+            console.error("Error:", error);
+          });
+      });
+    </script>
   </body>
 </html>

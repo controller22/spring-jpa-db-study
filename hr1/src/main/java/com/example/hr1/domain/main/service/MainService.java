@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.hr1.domain.main.dto.ReqInsertMainDTO;
 import com.example.hr1.domain.main.dto.ResMainDTO;
 import com.example.hr1.model.regions.entity.RegionsEntity;
 import com.example.hr1.model.regions.repository.RegionsRepository;
@@ -23,6 +24,20 @@ public class MainService {
     @Autowired
     private RegionsRepository regionsRepository;
 
+    public void postMainData(ReqInsertMainDTO reqInsertMainDTO){
+        
+        long count = regionsRepository.count();
+
+
+        RegionsEntity regionsEntity = RegionsEntity.builder()
+            .regionId((int)count+1)
+            .regionName(reqInsertMainDTO.getRegionsName())
+            .build();
+
+        regionsRepository.save(regionsEntity);
+
+    }
+
     @Transactional
     public List<ResMainDTO> getMainPageData() {
 
@@ -35,4 +50,6 @@ public class MainService {
 
         return resMainDTOList;
     }
+
+   
 }

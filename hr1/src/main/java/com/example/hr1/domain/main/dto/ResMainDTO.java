@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResMainDTO {
-    
+
     private Integer regionsId;
     private String regionsName;
 

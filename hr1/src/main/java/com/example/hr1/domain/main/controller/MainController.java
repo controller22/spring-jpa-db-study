@@ -18,13 +18,10 @@ public class MainController {
     @GetMapping("/")
     // Mapping을 기반으로 함수 실행 -> controller의 함수 이름은 중요 X
     public ModelAndView mainPage() {
-
         ModelAndView modelAndView = new ModelAndView();
         List<ResMainDTO> resMainDTOList = mainsService.getMainPageData();
         modelAndView.addObject("resMainDTOList", resMainDTOList);
         modelAndView.setViewName("main/main");
-
-        
         return modelAndView;
     }
 

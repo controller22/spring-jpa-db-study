@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +16,8 @@ import lombok.NoArgsConstructor;
 // 데이터베이스의 테이블과 연동
 @Table(name="regions")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 // entity에서 setter는 꼭 필요한 경우만 사용
 // toString도 직접 만드는 것을 추천

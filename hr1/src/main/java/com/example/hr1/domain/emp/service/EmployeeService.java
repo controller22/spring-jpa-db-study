@@ -11,13 +11,22 @@ import com.example.hr1.domain.emp.dto.EmpTableDTO;
 import com.example.hr1.model.employee.entity.EmployeeEntity;
 import com.example.hr1.model.employee.repository.EmployeeRepository;
 
-import jakarta.persistence.Id;
-
 @Service
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    public List<EmpTableDTO> getSearchEmpTTbleData(String firstName){
+        // firstName이 null이면 findAll
+        // 아닌 경우 findByFirstName ~
+        if (firstName==null) {
+            
+            return EmpTableDTO.fromEntityList(employeeRepository.findAll());
+        } else {
+            return EmpTableDTO.fromEntityList(employeeRepository.findByFirstNameContainingIgnoreCase(firstName));
+        }
+    }
 
     public List<EmpTableDTO> getempListPageData() {
        
