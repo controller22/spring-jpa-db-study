@@ -2,6 +2,8 @@ package com.example.hr1.model.regions.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 // 엔티티임을 명시
 @Entity
 // 데이터베이스의 테이블과 연동
-@Table(name="regions")
+@Table(name = "regions")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,13 +26,19 @@ import lombok.NoArgsConstructor;
 public class RegionsEntity {
     // 기본키 (PK)에 @Id를 붙인다.
     @Id
+    // 값 자동 증가
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     // 데이터베이스에 있는 컬럼명 연결
     // 컬럼의 속성을 맞춰주는 것이 좋음
-    @Column(name="region_id",nullable = false ,unique = true)
+    @Column(name = "region_id", nullable = false, unique = true)
     private Integer regionId;
 
-    @Column(name="region_name")
+    @Column(name = "region_name")
     private String regionName;
+
+    public void setResionName(String regionName) {
+        this.regionName = regionName;
+    }
 
     @Override
     public String toString() {

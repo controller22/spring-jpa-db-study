@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .x-button {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>지역수정</h1>
+    <div>
+      글번호
+      <span th:text="${resUpdateDTO.regionsId}"></span>
+    </div>
+    <div>
+      <input
+        id="updateRegion"
+        type="text"
+        th:value="${resUpdateDTO.regionsName}"
+      />
+      <button
+        id="updateButton"
+        th:onclick="update([[${resUpdateDTO.regionsId}]])"
+      >
+        수정
+      </button>
+    </div>
+
+    <script>
+      // 방법2 매개변수로 받기
+      const update = (regionId) => {
+        // 방법 1
+        // document.querySelector(#"regionId").innerText;
+
+        const regionName = document.querySelector("#updateRegion").value;
+
+        const dto = {
+          regionsName: regionName,
+        };
+
+        fetch("/api/v1/main/" + regionId, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dto),
+        })
+          .then((response) => response.json()) // 받은 응답을 JSON으로 파싱합니다.
+          .then((result) => {
+            // 서버에서 보낸 JSON 데이터를 사용합니다.
+            alert(result.message);
+            if (result.code === 0) {
+              location.href = "/";
+            }
+          });
+      };
+    </script>
+  </body>
+</html>

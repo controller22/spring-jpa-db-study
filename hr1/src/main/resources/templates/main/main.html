@@ -22,14 +22,21 @@
           <td th:text="${dto.regionsId}"></td>
           .&nbsp;
           <td th:text="${dto.regionsName}"></td>
-          <span class="x-button">X</span>
+          <span
+            class="update-button"
+            th:onclick="goDetail([[${dto.regionsId}]])"
+            >수정하기</span
+          >
+          <span class="x-button" th:onclick="deleteRegion([[${dto.regionsId}]])"
+            >X</span
+          >
         </li>
       </ul>
     </div>
 
     <script>
       document.querySelector("#addButton").addEventListener("click", () => {
-        const reqInsertMainDTO = {
+        const DTO = {
           regionsName: document.querySelector("#newRegion").value,
         };
 
@@ -38,7 +45,7 @@
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(reqInsertMainDTO),
+          body: JSON.stringify(DTO),
         })
           .then((response) => response.json()) // 받은 응답을 JSON으로 파싱합니다.
           .then((data) => {
@@ -54,6 +61,32 @@
             console.error("Error:", error);
           });
       });
+
+
+      const deleteRegion = (regionId) => {
+        const check = confirm(`정말 ${regionId}번 지역을 삭제하시겠습니까?`);
+
+        if (check) {
+          fetch("/api/v1/main/" + regionId, {
+            method: "DELETE",
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              alert(result.message);
+              if (result.code == 0) {
+                location.reload();
+              }
+            });
+        }
+      };
+
+
+
+      
+      // 페이지 이동
+      const goDetail = (regionId) => {
+        location.href = "/update/" + regionId;
+      };
     </script>
   </body>
 </html>

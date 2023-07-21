@@ -25,6 +25,4 @@ public interface RegionsRepository  extends JpaRepository<RegionsEntity, Integer
     // and - and
     RegionsEntity findByRegionIdAndRegionName(Integer regionId,String regionName);
 
-    
-    
 }
